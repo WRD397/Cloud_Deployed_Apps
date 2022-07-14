@@ -23,7 +23,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Link</a>
@@ -43,6 +43,9 @@
                         </ul>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/sub">Subscribe</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link disabled">Disabled</a>
                     </li>
                 </ul>
@@ -54,29 +57,28 @@
         </div>
     </nav>
 
-
+    <br />
     <!-- FORM INSIDE A CONTAINER -->
     <div class='container my-5'>
         <h2>Add ToDo's</h2>
-        <form action="/" method="POST">
-            <!-- Title -->
-            <div class="mb-3">
-                <label for="Todo_Title" class="form-label">Title</label>
-                <input type="text" class="form-control" id="Todo_Title">
-            </div>
-            <!-- Description -->
-            <div class="mb-3">
-                <label for="desc" class="form-label">Description</label>
-                <input type="text" class="form-control" id="desc">
-            </div>
-            <!-- Extra CheckBox-->
-            <!--
+        <!-- Title -->
+        <div class="mb-3">
+            <label for="Todo_Title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="Todo_Title">
+        </div>
+        <!-- Description -->
+        <div class="mb-3">
+            <label for="desc" class="form-label">Description</label>
+            <input type="text" class="form-control" id="desc">
+        </div>
+        <!-- Extra CheckBox-->
+        <!--
             <div class="mb-3 form-check">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
                 <label class="form-check-label" for="exampleCheck1">Check me out</label>
             </div> -->
 
-            <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
 

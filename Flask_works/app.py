@@ -1,4 +1,3 @@
-#from crypt import methods
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
@@ -23,7 +22,7 @@ class Todo(db.Model):
     Todo_Title = db.Column(db.String(200), nullable=False)
     # nullable = False means it can't be null
     desc = db.Column(db.String(1000), nullable=False)
-    date_created = db.Column(db.DateTime, default=datetime.utcnow)
+    date_created = db.Column(db.DateTime, default=datetime.now)
 
     def __repr__(self) -> str:
         return f"{self.Serial_no} - {self.Todo_Title}"
@@ -34,8 +33,6 @@ class Todo(db.Model):
 
 @app.route("/")
 def home_page():
-    if request.method == 'POST':
-        print("post")
     todo = Todo(Todo_Title="First todo",
                 desc="start working out at 12pm for 10 minutes")
     db.session.add(todo)
@@ -48,8 +45,21 @@ def home_page():
 
 @app.route("/his")
 def history():
-    allTodo = Todo.query.all()
     return "Hii these are all the todos you have added !"
+
+# Lets create a form for newsletter
+
+
+@app.route("/sub")
+def subscribe():
+    title = "Subscribe to my newsletter"
+    return render_template("newsletter.html", title=title)
+
+
+@app.route("/form")
+def form():
+    title = "Thanks ! "
+    return render_template("form.html", title=title)
 
 
 if __name__ == "__main__":
