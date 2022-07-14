@@ -1,4 +1,5 @@
-from flask import Flask, render_template
+#from crypt import methods
+from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -25,7 +26,7 @@ class Todo(db.Model):
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self) -> str:
-        return f"{self.serial_no} - {self.Title}"
+        return f"{self.Serial_no} - {self.Todo_Title}"
 
 
 # adding a decorator 'routes'. routes basically add the endpoints, ie. below method is  basically brings you to the home page.
@@ -33,14 +34,22 @@ class Todo(db.Model):
 
 @app.route("/")
 def home_page():
-    return render_template('index2.html')
+    if request.method == 'POST':
+        print("post")
+    todo = Todo(Todo_Title="First todo",
+                desc="start working out at 12pm for 10 minutes")
+    db.session.add(todo)
+    db.session.commit()
+    allTodo = Todo.query.all()
+    return render_template('index2.html', allTodo=allTodo)
 
 # Let's create another endpoint...
 
 
-@app.route("/Products")
-def products():
-    return "Hii, these are all my products"
+@app.route("/his")
+def history():
+    allTodo = Todo.query.all()
+    return "Hii these are all the todos you have added !"
 
 
 if __name__ == "__main__":
