@@ -23,21 +23,32 @@ class Todo(db.Model):
 
 # Home Page
 @app.route('/', methods=['GET', 'POST'])
-def hello_world():
+def home():
     if request.method == 'POST':
         title = request.form['title']
         desc = request.form['desc']
         todo = Todo(title=title, desc=desc)
         db.session.add(todo)
         db.session.commit()
+
     allTodo = Todo.query.all()
-    return render_template('index.html', allTodo=allTodo)
+    return render_template("index.html", allTodo=allTodo)
+
 
 # Update
-# @app.route('/update/<int:sno>')
-# def update(sno):
- #   todo_update = Todo.query.filter_by(sno=sno).first()
-  #  return render_template("update.html",todo=todo_update)
+@app.route('/update/<int:sno>', methods=['GET', 'POST'])
+def update(sno):
+    if request.method == "POST":
+        title = request.form['title']
+        desc = request.form['desc']
+        todo_update = Todo.query.filter_by(sno=sno).first()
+        todo_update.title = title
+        todo_update.desc = desc
+        db.session.add(todo_update)
+        db.session.commit()
+        return redirect("/")
+    todo_update = Todo.query.filter_by(sno=sno).first()
+    return render_template("update.html", todo=todo_update)
 
 
 # Delete
